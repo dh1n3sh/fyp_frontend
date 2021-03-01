@@ -19,7 +19,7 @@ export default class QuestionButton extends Component{
             handleMarkState : props.handleMarkState
         }
 
-        if(Object.keys(this.state.hierarchy).length==0) {
+        if(Object.keys(this.state.hierarchy).length==0 || this.state.hierarchy instanceof Array) {
             this.state.isChild = true;
         }
         
@@ -47,7 +47,7 @@ export default class QuestionButton extends Component{
     renderChildButtons(){
         var children = Object.keys(this.state.hierarchy);
 
-        if(children.length===0) {
+        if(children.length===0 || this.state.hierarchy instanceof Array) {
             return null;
         }
 

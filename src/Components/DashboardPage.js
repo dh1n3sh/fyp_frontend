@@ -64,7 +64,9 @@ class DashboardPage extends Component {
             if(this.state.curType===3){
                 this.props.history.push({
                     pathname : '/grading',
-                    state : this.state
+                    state : this.state,
+                    data : this.state.data[this.state.data.length - 1],
+                    
                 });
             }
             else{
@@ -129,7 +131,7 @@ class DashboardPage extends Component {
 
         axios.post('/api/courses/',formData)
             .then(res=>{
-                if(res.status === 200)
+                if(res.status < 300 && res.status > 199)
                 {
                     this.togglePopup();
                     this.populateData();
@@ -146,7 +148,7 @@ class DashboardPage extends Component {
             <div>
                 <MyJumbotron state={this.state} history={this.props.history} goBack={this.goBack} addBtnHandler = {this.addBtnHandler} dontRenderButton = {this.state.curType==2} />
                 <div className="dashboard">
-                    {this.state.data.map((obj) => <DashboardSectionComponent data={obj} type={this.state.availableTypes[this.state.curType]} clickHandler={this.clickhandler} />)}
+                    {this.state.data.map((obj) => <DashboardSectionComponent data={obj} type={this.state.availableTypes[this.state.curType]} clickHandler={this.clickhandler} populateData = {this.populateData}/>)}
                 </div>
                  <Modal isOpen = {this.state.popup}>
                         <ModalHeader>

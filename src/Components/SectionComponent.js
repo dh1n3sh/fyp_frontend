@@ -29,15 +29,23 @@ export default class SectionComponent extends Component{
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        
-            return {
+
+            // if(prevState.heading === 'questions'){
+            // console.log(nextProps);}
+
+            let newState = {
                 width : nextProps.width,
                 heading : nextProps.heading,
                 isSubQuestionVisible : nextProps.isSubQuestionVisible,
                 currQno : nextProps.currQno,
-                subQuestionMarks : nextProps.subQuestionMarks
-                
+                subQuestionMarks : nextProps.subQuestionMarks   
             }
+
+            if(nextProps.data !== undefined && nextProps.data !== null && prevState.heading === 'questions'){
+                newState['data']  = {'QpPattern' : nextProps.data}
+            }
+
+            return newState 
         }
 
     
@@ -52,6 +60,8 @@ export default class SectionComponent extends Component{
     }
 
     renderQuestionButton(){
+        if(this.state.data.QpPattern instanceof Array) return null;
+
         return Object.keys(this.state.data.QpPattern).map(question => {
              return <QuestionButton
                         ancestor = ""
@@ -71,7 +81,7 @@ export default class SectionComponent extends Component{
 
     renderSectionElements(){
         
-        if(this.state.data==undefined) return null;
+        if(this.state.data==undefined || this.state.data == null) return null;
 
         switch(this.state.heading){
             case "segments":
