@@ -63,15 +63,6 @@ class GradingPage extends Component{
               })
             }
           })
-
-          axios.get(this.state.qptreeUrl.qp_tree)
-            .then(res=>{
-              if(res.status < 300 && res.status > 199){
-                this.setState({
-                  qptree : res.data
-                })
-              } 
-            })
       }
 
       goBack(){
