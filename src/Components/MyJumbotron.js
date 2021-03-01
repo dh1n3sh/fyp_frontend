@@ -10,6 +10,10 @@ class MyJumbotron extends Component {
     // console.log(props);
 
     render() {
+        const capitalize = (s) => {
+            if (typeof s !== 'string') return ''
+            return s.charAt(0).toUpperCase() + s.slice(1)
+        }
         // console.log(this.props)
         let variant = 'dark';
         let nav_history = "";
@@ -17,20 +21,25 @@ class MyJumbotron extends Component {
             if (nav_history === "") nav_history += element.name
             else nav_history += (" - " + element.name)
         });
+        if (nav_history === "") nav_history = "Home"
         // console.log(this.props.state.selectedFields);
         return <div>
             <Navbar bg="dark" variant="dark">
-                {this.props.state.curType !== 0 && 
-                <Button variant='primary'
-                    onClick={this.props.goBack}
-                    disabled={this.props.state.curType === 0}
-                    style={{ float: "left", marginRight: "1rem" }}
-                > Back </Button>
+                {this.props.state.curType !== 0 &&
+                    <Button variant='primary'
+                        onClick={this.props.goBack}
+                        disabled={this.props.state.curType === 0}
+                        style={{ float: "left", marginRight: "1rem" }}
+                    > Back </Button>
                 }
-                
+
                 <Navbar.Brand>{nav_history}</Navbar.Brand>
                 <Nav className="mr-auto">
-
+                    {this.props.dontRenderButton != true && <Button
+                        variant="primary"
+                        onClick={this.props.addBtnHandler}
+                        style={{ marginLeft: "10px" }}
+                    > Add {capitalize(this.props.state.availableTypes[this.props.state.curType])}</Button>}
 
                 </Nav>
 
