@@ -65,8 +65,7 @@ class DashboardPage extends Component {
                 this.props.history.push({
                     pathname : '/grading',
                     state : this.state,
-                    data : this.state.data[this.state.data.length - 1],
-                    
+                    data : this.state.data[this.state.data.length - 1]
                 });
             }
             else{

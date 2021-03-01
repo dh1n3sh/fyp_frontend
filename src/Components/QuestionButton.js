@@ -54,7 +54,7 @@ export default class QuestionButton extends Component{
         return children.map(subquestion=>{
             return <QuestionButton 
                 hierarchy = {this.state.hierarchy[subquestion]}
-                ancestor = {this.state.ancestor + this.state.qno}
+                ancestor = {this.state.ancestor + "-" + this.state.qno}
                 isVisible = {this.state.isExpanded}
                 qno = {subquestion}
                 width = {"60%"}

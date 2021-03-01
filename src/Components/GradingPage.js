@@ -20,24 +20,38 @@ class GradingPage extends Component{
             subQuestionMarks : undefined,
             dashboardstate : this.props.location.state,
             imageUrl : undefined,
-            data : this.props.location.data,
-            qptree : this.props.location.qptree
+            data : this.props.location.data
         }
         this.handleMarkState = this.handleMarkState.bind(this);
         this.goBack = this.goBack.bind(this);
+        // this.getMarks = this.getMarks.bind(this);
       }
+
+      // getMarks(tree,path){
+      //   if(path.length === 0) return tree;
+      //   let newPath = path.map(x=>x);
+      //   newPath.shift();
+      //   return this.getMarks(tree[path[0]],newPath);
+      // }
     
       handleMarkState(isSubQuestionVisible,currQno,data){
-        console.log(data);
+        // console.log(data);
+
+        let path = currQno.split("-")
+        path.shift();
+        // let marks = this.getMarks(this.state.qptree,path);
+        let marks = data[2];
+        let imageUrl = data[3];
+        // console.log(imageUrl)
         this.setState({
           isSubQuestionVisible : isSubQuestionVisible,
           currQno : currQno,
-          subQuestionMarks : data[1]
+          subQuestionMarks : marks,
+          imageUrl : imageUrl
         });
       }
     
       componentDidMount(){
-        document.title = "grading"
         // TODO
         // console.log(this.state.data)
         axios.get(this.state.data.grade_tree)
@@ -45,10 +59,19 @@ class GradingPage extends Component{
             // console.log(res)
             if(res.status < 300 && res.status > 199){
               this.setState({
-                test : res.data
+                test : {'QpPattern' : res.data}
               })
             }
           })
+
+          axios.get(this.state.qptreeUrl.qp_tree)
+            .then(res=>{
+              if(res.status < 300 && res.status > 199){
+                this.setState({
+                  qptree : res.data
+                })
+              } 
+            })
       }
 
       goBack(){
@@ -73,7 +96,7 @@ class GradingPage extends Component{
             <div className="App">
                 <SectionComponent width="15%" heading="questions" data={this.state.test} handleMarkState ={this.handleMarkState} />
                 <SectionComponent width="15%" heading="segments" data={this.state.segments} />
-                <SectionComponent width="50%" heading="answer scripts" data={null}/>
+                <SectionComponent width="50%" heading="answer scripts" data={this.state.imageUrl}/>
                 {/* imaged need above  */}
                 <SectionComponent width="20%" heading="marks allocation" data="dummy"
                                   isSubQuestionVisible={this.state.isSubQuestionVisible}

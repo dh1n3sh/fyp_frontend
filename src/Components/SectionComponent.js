@@ -41,8 +41,8 @@ export default class SectionComponent extends Component{
                 subQuestionMarks : nextProps.subQuestionMarks   
             }
 
-            if(nextProps.data !== undefined && nextProps.data !== null && prevState.heading === 'questions'){
-                newState['data']  = {'QpPattern' : nextProps.data}
+            if(nextProps.data !== undefined && nextProps.data !== null){
+                newState['data']  = nextProps.data
             }
 
             return newState 
@@ -51,7 +51,7 @@ export default class SectionComponent extends Component{
     
     handleButtonClick(event){
         var isVisible = this.state.isChild
-        this.state.handleMarkState(isVisible,this.state.ancestor+this.state.qno,this.state.hierarchy);
+        this.state.handleMarkState(isVisible,this.state.ancestor+'-'+this.state.qno,this.state.hierarchy);
         this.setState((prevState)=>{
             return ({
             isExpanded : !prevState.isExpanded
@@ -64,7 +64,7 @@ export default class SectionComponent extends Component{
 
         return Object.keys(this.state.data.QpPattern).map(question => {
              return <QuestionButton
-                        ancestor = ""
+                        ancestor = "Q"
                         hierarchy = {this.state.data.QpPattern[question]}
                         qno = {question}
                         isVisible = {true}
