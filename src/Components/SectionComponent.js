@@ -126,9 +126,13 @@ export default class SectionComponent extends Component{
     }
 
     render(){
+        const capitalize = (s) => {
+            if (typeof s !== 'string') return ''
+            return s.charAt(0).toUpperCase() + s.slice(1)
+          }
         return(
             <div className = "section" style = {{width : this.state.width}}>
-                {this.state.heading}
+                {capitalize(this.state.heading)}
                 <div className = "sectionButtonPanel">
                     {this.renderSectionElements()}
                 </div>

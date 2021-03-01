@@ -46,3 +46,21 @@ div.sectionButtonPanel{
     text-align : center;
     background-color :cadetblue;
 }
+.img-card {
+    object-fit: contain;
+    border-radius: 20px;
+
+}
+
+.blue-circle-icon {
+    position: absolute;
+    top: 30px;   
+    right: 10px;
+  }
+
+.icon-tag {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+  }
