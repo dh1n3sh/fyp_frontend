@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "./axiosConfig";
-import { Card } from 'react-bootstrap'
+import { Card, Toast } from 'react-bootstrap'
 import "./index.css"
 
 export default class DashboardSectionComponent extends Component {
@@ -11,9 +11,10 @@ export default class DashboardSectionComponent extends Component {
 
         this.state = {
             data: this.props.data,
-            type : this.props.type,
+            type: this.props.type,
             clickHandler: this.props.clickHandler,
-            populateData : this.props.populateData
+            populateData: this.props.populateData,
+            toastHandler: this.props.toastHandler,
         }
 
         this.deleteBtn = this.deleteBtn.bind(this);
@@ -25,22 +26,28 @@ export default class DashboardSectionComponent extends Component {
 
         let newState = {
             data: props.data,
-            type : props.type,
+            type: props.type,
             clickHandler: props.clickHandler
         }
         return newState
     }
 
-    deleteBtn(event){
+    deleteBtn(event) {
+        const capitalize = (s) => {
+            if (typeof s !== 'string') return ''
+            return s.charAt(0).toUpperCase() + s.slice(1)
+          }
         event.stopPropagation();
-        axios.delete('/api/'+this.state.type+'s/'+this.state.data.id.toString()+'/')
-            .then((res)=>{
+        axios.delete('/api/' + this.state.type + 's/' + this.state.data.id.toString() + '/')
+            .then((res) => {
                 // console.log(res);
-                if(res.status < 300 && res.status > 199 ){
+                if (res.status < 300 && res.status > 199) {
+                    this.state.toastHandler(["Deleted",capitalize(this.state.type), this.state.data.id.toString()]);
                     this.state.populateData();
-                    window.alert(this.state.type + ' deleted !');
+                    // window.alert(this.state.type + ' deleted !');
+                    
                 }
-                else{
+                else {
                     window.alert(res.message);
                     console.log(res);
                 }
@@ -48,6 +55,7 @@ export default class DashboardSectionComponent extends Component {
     }
 
     render() {
+        
         // return <div className="dashboard-section" onClick={(e) => { this.state.clickHandler(this.state.data) }}>
         //             {this.state.data.name}
         //             <img 
@@ -56,45 +64,49 @@ export default class DashboardSectionComponent extends Component {
         //                 style={{ float : 'right' , marginRight : '10px' , marginTop : '10px'}}
         //                 onClick={this.deleteBtn}
         //                 />
-        //         </div>
-        let variant = "dark";
-        // return <Card className="text-center mb-2"
+        //         </div>>
         //     bg={variant.toLowerCase()}
         //     text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
         //     style={{ width: '10rem', height : '10rem' , margin : '3rem', lineHeight : '10rem'}}
         //     >
         //         <img src="/delete-24px.svg"/>
         //     <Card.Text>{this.state.data.name}</Card.Text>
-            
-        // </Card>
+
+        // </Card>;
+        let variant = 'dark'
         return <div onClick={(e) => { this.state.clickHandler(this.state.data) }}>
             <Card bg={variant.toLowerCase()}
-            text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
-            // style={{ width: '10rem', height : '10rem' , margin : '3rem', lineHeight : '10rem'}}
-            style={{ width: '13rem', margin: '2rem', borderRadius: '20px',  height : '10rem'}}>
-                       
-                            <Card.Img style={{position: "relative"}} variant="top"  className="img-card img-card-small" />
-                            <div className="blue-circle-icon">
-                                <img src={"/icons8-delete-bin-24-white.png"}
-                                    alt="live-icon"
-                                    className="icon-tag"
-                                    onClick={this.deleteBtn}/>
-                            </div>
-                       
-                        <Card.Body style={{borderRadius: '5px'}}>
-                            <Card.Text style={{
-                                    fontSize: '1rem', 
-                                    fontWeight: 'normal',
-                                    fontStretch: 'normal',
-                                    fontStyle: 'normal',
-                                    lineHeight: '7rem',
-                                    letterSpacing: 'normal',
-                                    textAlign: 'center'
-                                    }}>
-                            {this.state.data.name}                            
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                    </div>
+                text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
+                // style={{ width: '10rem', height : '10rem' , margin : '3rem', lineHeight : '10rem'}}
+                style={{ width: '13rem', margin: '2rem', borderRadius: '20px', height: '10rem' }}>
+
+                <Card.Img style={{ position: "relative" }} variant="top" className="img-card img-card-small" />
+                <div className="blue-circle-icon">
+                    <img src={"/icons8-delete-bin-24-white.png"}
+                        alt="live-icon"
+                        className="icon-tag"
+                        onClick={this.deleteBtn} />
+                </div>
+
+                <Card.Body style={{ borderRadius: '5px' }}>
+                    <Card.Text style={{
+                        fontSize: '1rem',
+                        fontWeight: 'normal',
+                        fontStretch: 'normal',
+                        fontStyle: 'normal',
+                        lineHeight: '7rem',
+                        letterSpacing: 'normal',
+                        textAlign: 'center'
+                    }}>
+                        {this.state.data.name}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            {/* {this.state.data.map((obj) => <DashboardSectionComponent data={obj} type={this.state.availableTypes[this.state.curType]} clickHandler={this.clickhandler} populateData={this.populateData} />)} */}
+
+
+
+           
+        </div>
     }
 }

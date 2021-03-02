@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { ReactSession } from "react-client-session";
 // import { Button, Jumbotron } from "reactstrap";
-import { Button, Jumbotron, Navbar, Nav, NavDropdown, Form, FormControl, Card } from 'react-bootstrap'
+import { Button, Navbar, Nav } from 'react-bootstrap'
 
 class MyJumbotron extends Component {
     // const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -43,20 +43,12 @@ class MyJumbotron extends Component {
 
                 </Nav>
 
-                <Navbar.Brand>{ReactSession.get('userdata')['name']}</Navbar.Brand>
-                <Button
+                {ReactSession.get('userdata') && <Navbar.Brand>{ReactSession.get('userdata')['name']}</Navbar.Brand>}
+                {ReactSession.get('userdata') && <Button
                     variant="danger"
                     onClick={() => { ReactSession.remove('userdata'); this.props.history.push('/login') }}
                     style={{ float: "right" }}
-                > Logout </Button>
-                {/* <div style={{display : "inline-block" , marginLeft : "45vw"}}>
-                                 <div><h5>{this.props.state.availableTypes[this.props.state.curType]}</h5></div>
-                                  <div > {this.props.dontRenderButton!=true && <Button 
-                                                                             variant="primary" 
-                                                                                 onClick={this.props.addBtnHandler}
-                                                                                 style = {{ marginLeft : "10px"}}
-                                                                                 > Add </Button>}</div>
-                         </div> */}
+                > Logout </Button>}
             </Navbar>
         </div>
         // <Jumbotron fluid bg={variant.toLowerCase()} >
