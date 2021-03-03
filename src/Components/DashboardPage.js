@@ -82,7 +82,7 @@ class DashboardPage extends Component {
                 this.props.history.push({
                     pathname: '/grading',
                     state: this.state,
-                    data: this.state.data[this.state.data.length - 1]
+                    data: data
                 });
             }
             else {
@@ -101,7 +101,7 @@ class DashboardPage extends Component {
         })
             .then(res => {
                 this.setState({ data: res.data })
-                // console.log(res.data);
+                console.log(res.data);
             })
     }
     componentDidMount() {
@@ -158,7 +158,7 @@ class DashboardPage extends Component {
     }
 
     render() {
-
+        console.log(this.state.data)
         return (
             <div
                 aria-live="polite"
@@ -207,7 +207,7 @@ class DashboardPage extends Component {
 
                                     toasts: newToasts
                                 }
-                            })}
+                            })}  
 
                             show={true} delay={3000} autohide
                             >

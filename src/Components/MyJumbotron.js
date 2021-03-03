@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { ReactSession } from "react-client-session";
 // import { Button, Jumbotron } from "reactstrap";
-import { Button, Navbar, Nav } from 'react-bootstrap'
+import { Button, Navbar, Nav, Card } from 'react-bootstrap'
 
 class MyJumbotron extends Component {
     // const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -21,10 +21,12 @@ class MyJumbotron extends Component {
             if (nav_history === "") nav_history += element.name
             else nav_history += (" - " + element.name)
         });
-        if (nav_history === "") nav_history = "Home"
+        let selectedType = this.props.state.availableTypes[this.props.state.curType]
+        // if (nav_history === "") nav_history = "Home"
         // console.log(this.props.state.selectedFields);
         return <div>
             <Navbar bg="dark" variant="dark">
+
                 {this.props.state.curType !== 0 &&
                     <Button variant='primary'
                         onClick={this.props.goBack}
@@ -40,8 +42,10 @@ class MyJumbotron extends Component {
                         onClick={this.props.addBtnHandler}
                         style={{ marginLeft: "10px" }}
                     > Add {capitalize(this.props.state.availableTypes[this.props.state.curType])}</Button>}
-
+                        
                 </Nav>
+                {selectedType && <Navbar.Brand style={{marginRight: "43rem",  align:"center", weight:"bold"}}>{capitalize(selectedType)+" Dashboard"}</Navbar.Brand>}
+
 
                 {ReactSession.get('userdata') && <Navbar.Brand>{ReactSession.get('userdata')['name']}</Navbar.Brand>}
                 {ReactSession.get('userdata') && <Button

@@ -20,7 +20,7 @@ class GradingPage extends Component{
             subQuestionMarks : undefined,
             dashboardstate : this.props.location.state,
             imageUrl : undefined,
-            data : this.props.location.data
+            data : this.props.location.data,
         }
         this.handleMarkState = this.handleMarkState.bind(this);
         this.goBack = this.goBack.bind(this);
@@ -80,7 +80,7 @@ class GradingPage extends Component{
     
       render(){
         // "https://static.toiimg.com/photo/msid-67586673/67586673.jpg?3918697"
-        // console.log(this.state.goBack)
+        console.log(this.state.data)
         return (
           <div>
             <MyJumbotron state={this.state.dashboardstate} history={this.props.history} dontRenderButton={true} goBack={this.goBack}/>
@@ -93,6 +93,7 @@ class GradingPage extends Component{
                                   isSubQuestionVisible={this.state.isSubQuestionVisible}
                                   currQno={this.state.currQno}
                                   subQuestionMarks={this.state.subQuestionMarks}
+                                  handwritingVerified={this.state.data["handwriting_verified"]}
                                   />
             </div>
           </div>
