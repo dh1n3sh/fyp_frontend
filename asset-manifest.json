@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/fyp_frontend/static/css/main.74be73e2.chunk.css",
+    "main.js": "/fyp_frontend/static/js/main.068cd860.chunk.js",
+    "main.js.map": "/fyp_frontend/static/js/main.068cd860.chunk.js.map",
+    "runtime-main.js": "/fyp_frontend/static/js/runtime-main.87084115.js",
+    "runtime-main.js.map": "/fyp_frontend/static/js/runtime-main.87084115.js.map",
+    "static/css/2.d088b949.chunk.css": "/fyp_frontend/static/css/2.d088b949.chunk.css",
+    "static/js/2.412eb6d8.chunk.js": "/fyp_frontend/static/js/2.412eb6d8.chunk.js",
+    "static/js/2.412eb6d8.chunk.js.map": "/fyp_frontend/static/js/2.412eb6d8.chunk.js.map",
+    "static/js/3.42836d89.chunk.js": "/fyp_frontend/static/js/3.42836d89.chunk.js",
+    "static/js/3.42836d89.chunk.js.map": "/fyp_frontend/static/js/3.42836d89.chunk.js.map",
+    "index.html": "/fyp_frontend/index.html",
+    "static/css/2.d088b949.chunk.css.map": "/fyp_frontend/static/css/2.d088b949.chunk.css.map",
+    "static/css/main.74be73e2.chunk.css.map": "/fyp_frontend/static/css/main.74be73e2.chunk.css.map",
+    "static/js/2.412eb6d8.chunk.js.LICENSE.txt": "/fyp_frontend/static/js/2.412eb6d8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.87084115.js",
+    "static/css/2.d088b949.chunk.css",
+    "static/js/2.412eb6d8.chunk.js",
+    "static/css/main.74be73e2.chunk.css",
+    "static/js/main.068cd860.chunk.js"
+  ]
+}
